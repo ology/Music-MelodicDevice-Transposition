@@ -1,0 +1,5 @@
+Revision history for Music-MelodicDevice-Transposition
+
+{{$NEXT}}
+    - Mint with Dist::Zilla.
+    - Copy functionality from the Music::MelodicDevice::Inversion module.
