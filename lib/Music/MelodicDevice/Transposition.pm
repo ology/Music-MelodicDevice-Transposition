@@ -33,7 +33,7 @@ use namespace::clean;
 C<Music::MelodicDevice::Transposition> applies transposition, both
 chromatic or diatonic, to a series of ISO formatted notes.
 
-While there are a modules on CPAN that do chromatic transposition,
+While there are modules on CPAN that do chromatic transposition,
 none appear to apply diatonic transposition to an arbitrary series of
 notes.  Hence this module.
 
