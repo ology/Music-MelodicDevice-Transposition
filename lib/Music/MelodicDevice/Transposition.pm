@@ -2,7 +2,7 @@ package Music::MelodicDevice::Transposition;
 
 # ABSTRACT: Apply chromatic and diatonic transposition to notes
 
-our $VERSION = '0.0102';
+our $VERSION = '0.0103';
 
 use List::SomeUtils qw(first_index);
 use Music::Scales qw(get_scale_notes is_scale);
