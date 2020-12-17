@@ -122,10 +122,9 @@ sub transpose {
     my ($self, $offset, $notes) = @_;
 
     my @transposed;
-    my @pitches;
 
     if ($self->scale_name eq 'chromatic') {
-        @pitches = map { Music::Note->new($_, 'ISO')->format('midinum') + $offset } @$notes;
+        my @pitches = map { Music::Note->new($_, 'ISO')->format('midinum') + $offset } @$notes;
         @transposed = map { Music::Note->new($_, 'midinum')->format('ISO') } @pitches;
     }
     else {
