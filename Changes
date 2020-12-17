@@ -1,5 +1,7 @@
 Revision history for Music-MelodicDevice-Transposition
 
 {{$NEXT}}
+
+0.0100 2020-12-16 16:40:34
     - Mint with Dist::Zilla.
     - Copy functionality from the Music::MelodicDevice::Inversion module.
