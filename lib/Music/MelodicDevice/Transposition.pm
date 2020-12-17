@@ -30,9 +30,8 @@ use namespace::clean;
 
 =head1 DESCRIPTION
 
-C<Music::MelodicDevice::Transposition> applies intervallic melodic
-transposition, both chromatic or diatonic, to a series of ISO
-formatted notes.
+C<Music::MelodicDevice::Transposition> applies transposition, both
+chromatic or diatonic, to a series of ISO formatted notes.
 
 While there are a modules on CPAN that do chromatic transposition,
 none appear to apply diatonic transposition to an arbitrary series of
