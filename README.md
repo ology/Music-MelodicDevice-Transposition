@@ -1,2 +1,2 @@
 # Music::MelodicDevice::Transposition
-Apply melodic transposition to a series of notes
+Apply chromatic and diatonic transposition to notes
