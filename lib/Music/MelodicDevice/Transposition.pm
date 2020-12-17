@@ -130,7 +130,7 @@ sub transpose {
     else {
         for my $n (@$notes) {
             my $i = first_index { $_ eq $n } @{ $self->_scale };
-            push @transposed, $self->_scale->[ $i + $offset ];
+            push @transposed, $i == -1 ? undef : $self->_scale->[ $i + $offset ];
         }
     }
     print 'Transposed: ', ddc(\@transposed) if $self->verbose;
