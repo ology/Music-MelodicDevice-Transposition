@@ -1,6 +1,8 @@
 Revision history for Music-MelodicDevice-Transposition
 
 {{$NEXT}}
+
+0.0104 2020-12-17 06:14:30
     - Whoops. Data::Dumper::Compact is necessary.
 
 0.0103 2020-12-16 18:50:26
