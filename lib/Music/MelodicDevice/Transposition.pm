@@ -114,7 +114,8 @@ Create a new C<Music::MelodicDevice::Transposition> object.
 
   $transposed = $md->transpose($offset, $notes);
 
-Return the transposed series of notes.
+Return the transposed series of B<notes> given an B<offset>
+appropriately based on the number of notes in the chosen scale.
 
 =cut
 
