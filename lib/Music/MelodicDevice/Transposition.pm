@@ -4,6 +4,7 @@ package Music::MelodicDevice::Transposition;
 
 our $VERSION = '0.0103';
 
+use Data::Dumper::Compact qw(ddc);
 use List::SomeUtils qw(first_index);
 use Music::Scales qw(get_scale_notes is_scale);
 use Music::Note;
@@ -133,7 +134,7 @@ sub transpose {
             push @transposed, $i == -1 ? undef : $self->_scale->[ $i + $offset ];
         }
     }
-    print "Transposed: @transposed\n" if $self->verbose;
+    print 'Transposed: ', ddc(\@transposed) if $self->verbose;
 
     return \@transposed;
 }
