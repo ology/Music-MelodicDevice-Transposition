@@ -3,6 +3,7 @@ Revision history for Music-MelodicDevice-Transposition
 {{$NEXT}}
     - Fix-up the eg/modulate program.
     - Improve documentation.
+    - Drop the dependency on Data::Dumper::Compact.
 
 0.0102 2020-12-16 18:16:08
     - Add the eg/modulate program.
