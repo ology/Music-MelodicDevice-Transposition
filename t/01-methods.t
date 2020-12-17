@@ -24,4 +24,9 @@ $expect = ['G4','B4','A4','D5','G5'];
 $got = $obj->transpose(4, \@notes);
 is_deeply $got, $expect, 'transpose';
 
+@notes = ('C4','E4','D#4','G4','C5');
+$expect = ['E4','G4',undef,'B4','E5'];
+$got = $obj->transpose(2, \@notes);
+is_deeply $got, $expect, 'transpose';
+
 done_testing();
