@@ -7,7 +7,6 @@ our $VERSION = '0.0104';
 use Data::Dumper::Compact qw(ddc);
 use List::SomeUtils qw(first_index);
 use Music::Scales qw(get_scale_notes is_scale);
-use Music::Note;
 use Moo;
 use strictures 2;
 use namespace::clean;
@@ -124,15 +123,9 @@ sub transpose {
 
     my @transposed;
 
-    if ($self->scale_name eq 'chromatic') {
-        my @pitches = map { Music::Note->new($_, 'ISO')->format('midinum') + $offset } @$notes;
-        @transposed = map { Music::Note->new($_, 'midinum')->format('ISO') } @pitches;
-    }
-    else {
-        for my $n (@$notes) {
-            my $i = first_index { $_ eq $n } @{ $self->_scale };
-            push @transposed, $i == -1 ? undef : $self->_scale->[ $i + $offset ];
-        }
+    for my $n (@$notes) {
+        my $i = first_index { $_ eq $n } @{ $self->_scale };
+        push @transposed, $i == -1 ? undef : $self->_scale->[ $i + $offset ];
     }
     print 'Transposed: ', ddc(\@transposed) if $self->verbose;
 
