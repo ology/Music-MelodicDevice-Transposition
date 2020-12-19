@@ -1,6 +1,8 @@
 Revision history for Music-MelodicDevice-Transposition
 
 {{$NEXT}}
+    - Remove the redundant "chromatic" logic.
+    - Drop the dependency on Music::Note.
 
 0.0104 2020-12-17 06:14:30
     - Whoops. Data::Dumper::Compact is necessary.
