@@ -85,6 +85,25 @@ sub _build__scale {
     return \@with_octaves;
 }
 
+has _enharmonics => (
+    is        => 'lazy',
+    init_args => undef,
+);
+
+sub _build__enharmonics {
+  my ($self) = @_;
+  my %enharmonics = (
+      'C#' => 'Db',
+      'D#' => 'Eb',
+      'E#' => 'F',
+      'F#' => 'Gb',
+      'G#' => 'Ab',
+      'A#' => 'Bb',
+      'B#' => 'C',
+  );
+  return { %enharmonics, reverse %enharmonics }
+}
+
 =head2 verbose
 
 Default: C<0>
@@ -124,12 +143,23 @@ sub transpose {
     my @transposed;
 
     for my $n (@$notes) {
-        my $i = first_index { $_ eq $n } @{ $self->_scale };
+        (my $i, $n) = $self->_find_pitch($n);
         push @transposed, $i == -1 ? undef : $self->_scale->[ $i + $offset ];
     }
     print 'Transposed: ', ddc(\@transposed) if $self->verbose;
 
     return \@transposed;
+}
+
+sub _find_pitch {
+    my ($self, $pitch) = @_;
+    my $i = first_index { $_ eq $pitch } @{ $self->_scale };
+    if ($i == -1) {
+        my $enharmonics = $self->_enharmonics;
+        $pitch =~ s/^([A-G][#b]?)(\d+)$/$enharmonics->{$1}$2/;
+        $i = first_index { $_ eq $pitch } @{ $self->_scale };
+    }
+    return $i, $pitch;
 }
 
 1;
