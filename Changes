@@ -1,6 +1,7 @@
 Revision history for Music-MelodicDevice-Transposition
 
 {{$NEXT}}
+    - Update the eg/modulate program.
 
 0.0400 2020-12-28 09:57:25
     - Use a midinum scale & convert with Music::Note.
