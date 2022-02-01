@@ -18,7 +18,7 @@ use constant OCTAVES => 10;
 
   use Music::MelodicDevice::Transposition;
 
-  my @notes = qw(C4 E4 D4 G4 C5);
+  my @notes = qw(C4 E4 D4 G4 C5); # either named or midinums
 
   # Chromatic
   my $md = Music::MelodicDevice::Transposition->new;
@@ -104,7 +104,7 @@ has verbose => (
   $md = Music::MelodicDevice::Transposition->new(
     scale_note => $scale_note,
     scale_name => $scale_name,
-    verbose => $verbose,
+    verbose    => $verbose,
   );
 
 Create a new C<Music::MelodicDevice::Transposition> object.
@@ -160,7 +160,7 @@ __END__
 
 =head1 SEE ALSO
 
-The F<t/01-methods.t> test file
+The F<t/01-methods.t> test and the F<eg/*> example files
 
 L<Data::Dumper::Compact>
 
