@@ -1,6 +1,7 @@
 Revision history for Music-MelodicDevice-Transposition
 
 {{$NEXT}}
+    - Use integer pitches as well as named notes.
     - Update the eg/modulate program.
 
 0.0400 2020-12-28 09:57:25
