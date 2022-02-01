@@ -18,7 +18,7 @@ use constant OCTAVES => 10;
 
   use Music::MelodicDevice::Transposition;
 
-  my @notes = qw(C4 E4 D4 G4 C5); # either named or midinums
+  my @notes = qw(C4 E4 D4 G4 C5); # either named notes or midinums
 
   # Chromatic
   my $md = Music::MelodicDevice::Transposition->new;
