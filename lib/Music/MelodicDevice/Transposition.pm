@@ -23,7 +23,7 @@ use constant OCTAVES => 10;
   # Chromatic
   my $md = Music::MelodicDevice::Transposition->new;
   my $transposed = $md->transpose(2, \@notes); # [D4, F#4, E4, A4, D5]
-  $transposed = $md->transpose(4, \@notes); # [E4, G#4, F#4, B4, E5]
+  $transposed = $md->transpose(4, \@notes);    # [E4, G#4, F#4, B4, E5]
 
   # Diatonic
   $md = Music::MelodicDevice::Transposition->new(scale_name => 'major');
