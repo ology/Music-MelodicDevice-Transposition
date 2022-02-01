@@ -121,13 +121,23 @@ appropriately based on the number of notes in the chosen scale.
 sub transpose {
     my ($self, $offset, $notes) = @_;
 
+    my $named = $notes->[0] =~ /[A-G]/ ? 1 : 0;
+
     my @transposed;
 
     for my $n (@$notes) {
         my ($i, $pitch) = $self->_find_pitch($n);
-        push @transposed, $i == -1
-            ? undef
-            : Music::Note->new($self->_scale->[ $i + $offset ], 'midinum')->format('ISO');
+        if ($i == -1) {
+            push @transposed, undef;
+        }
+        else {
+            if ($named) {
+                push @transposed, Music::Note->new($self->_scale->[ $i + $offset ], 'midinum')->format('ISO');
+            }
+            else {
+                push @transposed, $self->_scale->[ $i + $offset ];
+            }
+        }
     }
     print 'Transposed: ', ddc(\@transposed) if $self->verbose;
 
@@ -137,7 +147,8 @@ sub transpose {
 sub _find_pitch {
     my ($self, $pitch) = @_;
 
-    $pitch = Music::Note->new($pitch, 'ISO')->format('midinum');
+    $pitch = Music::Note->new($pitch, 'ISO')->format('midinum')
+        if $pitch =~ /[A-G]/;
 
     my $i = first_index { $_ == $pitch } @{ $self->_scale };
 
