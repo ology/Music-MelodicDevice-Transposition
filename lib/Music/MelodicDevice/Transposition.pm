@@ -6,11 +6,12 @@ our $VERSION = '0.0501';
 
 use Data::Dumper::Compact qw(ddc);
 use List::SomeUtils qw(first_index);
-use Music::Note;
 use Music::Scales qw(get_scale_MIDI is_scale);
 use Moo;
 use strictures 2;
 use namespace::clean;
+
+with('Music::PitchNum');
 
 use constant OCTAVES => 10;
 
@@ -63,6 +64,8 @@ scale with flats, a diatonic B<scale_name> must be used with a flat
 B<scale_note>.
 
 Please see L<Music::Scales/SCALES> for a list of valid scale names.
+
+=for Pod::Coverage OCTAVES
 
 =cut
 
@@ -133,7 +136,7 @@ sub transpose {
         }
         else {
             if ($named) {
-                push @transposed, Music::Note->new($self->_scale->[ $i + $offset ], 'midinum')->format('ISO');
+                push @transposed, $self->pitchname($self->_scale->[ $i + $offset ]);
             }
             else {
                 push @transposed, $self->_scale->[ $i + $offset ];
@@ -148,7 +151,7 @@ sub transpose {
 sub _find_pitch {
     my ($self, $pitch) = @_;
 
-    $pitch = Music::Note->new($pitch, 'ISO')->format('midinum')
+    $pitch = $self->pitchnum($pitch)
         if $pitch =~ /[A-G]/;
 
     my $i = first_index { $_ == $pitch } @{ $self->_scale };
@@ -168,8 +171,6 @@ L<Data::Dumper::Compact>
 L<List::SomeUtils>
 
 L<Moo>
-
-L<Music::Note>
 
 L<Music::Scales>
 
