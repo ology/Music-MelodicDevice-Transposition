@@ -22,8 +22,9 @@ use constant OCTAVES => 10;
   my @notes = qw(C4 E4 D4 G4 C5); # either named notes or midinums
 
   # Chromatic
-  my $md = Music::MelodicDevice::Transposition->new;
-  $md->notes(\@notes);
+  my $md = Music::MelodicDevice::Transposition->new(
+    notes => \@notes,
+  );
   my $transposed = $md->transpose(2); # [D4, F#4, E4, A4, D5]
   $transposed = $md->transpose(4);    # [E4, G#4, F#4, B4, E5]
   $transposed = $md->transpose(4, \@notes); # same thing
@@ -33,6 +34,8 @@ use constant OCTAVES => 10;
   $md->notes(\@notes);
   $transposed = $md->transpose(2); # [E4, G4, F4, B4, E5]
   $transposed = $md->transpose(4); # [G4, B4, A4, D5, G5]
+  $md->notes([qw(C4 E4 G4)]);
+  $transposed = $md->transpose(4); # [G4, B4, D5]
 
 =head1 DESCRIPTION
 
@@ -106,7 +109,7 @@ Default: C<[]> (no notes)
 =cut
 
 has notes => (
-    is      => 'ro',
+    is      => 'rw',
     isa     => sub { die "$_[0] is not a valid list" unless ref($_[0]) eq 'ARRAY' },
     default => sub { [] },
 );
