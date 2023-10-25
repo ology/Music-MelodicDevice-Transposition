@@ -1,6 +1,7 @@
 Revision history for Music-MelodicDevice-Transposition
 
 {{$NEXT}}
+    - Add (and default to) a notes list attribute.
 
 0.0502 2022-06-16 21:12:32
     - Use Music::PitchNum instead of Music::Note.

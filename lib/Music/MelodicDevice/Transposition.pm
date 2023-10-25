@@ -23,13 +23,16 @@ use constant OCTAVES => 10;
 
   # Chromatic
   my $md = Music::MelodicDevice::Transposition->new;
-  my $transposed = $md->transpose(2, \@notes); # [D4, F#4, E4, A4, D5]
-  $transposed = $md->transpose(4, \@notes);    # [E4, G#4, F#4, B4, E5]
+  $md->notes(\@notes);
+  my $transposed = $md->transpose(2); # [D4, F#4, E4, A4, D5]
+  $transposed = $md->transpose(4);    # [E4, G#4, F#4, B4, E5]
+  $transposed = $md->transpose(4, \@notes); # same thing
 
   # Diatonic
   $md = Music::MelodicDevice::Transposition->new(scale_name => 'major');
-  $transposed = $md->transpose(2, \@notes); # [E4, G4, F4, B4, E5]
-  $transposed = $md->transpose(4, \@notes); # [G4, B4, A4, D5, G5]
+  $md->notes(\@notes);
+  $transposed = $md->transpose(2); # [E4, G4, F4, B4, E5]
+  $transposed = $md->transpose(4); # [G4, B4, A4, D5, G5]
 
 =head1 DESCRIPTION
 
@@ -89,6 +92,25 @@ sub _build__scale {
     return \@scale;
 }
 
+=head2 notes
+
+  $md->notes(\@notes);
+
+The list of notes to use in transposition operations.
+
+This can be overriden with a B<notes> argument given to the
+B<transposition> method.
+
+Default: C<[]> (no notes)
+
+=cut
+
+has notes => (
+    is      => 'ro',
+    isa     => sub { die "$_[0] is not a valid list" unless ref($_[0]) eq 'ARRAY' },
+    default => sub { [] },
+);
+
 =head2 verbose
 
 Default: C<0>
@@ -108,6 +130,7 @@ has verbose => (
   $md = Music::MelodicDevice::Transposition->new(
     scale_note => $scale_note,
     scale_name => $scale_name,
+    notes      => \@notes,
     verbose    => $verbose,
   );
 
@@ -115,15 +138,18 @@ Create a new C<Music::MelodicDevice::Transposition> object.
 
 =head2 transpose
 
-  $transposed = $md->transpose($offset, $notes);
+  $transposed = $md->transpose($offset);
+  $transposed = $md->transpose($offset, \@notes);
 
-Return the transposed series of B<notes> given an B<offset>
+Return the transposed list of B<notes> given an B<offset>
 appropriately based on the number of notes in the chosen scale.
 
 =cut
 
 sub transpose {
     my ($self, $offset, $notes) = @_;
+
+    $notes ||= $self->notes;
 
     my $named = $notes->[0] =~ /[A-G]/ ? 1 : 0;
 
