@@ -2,7 +2,7 @@ package Music::MelodicDevice::Transposition;
 
 # ABSTRACT: Apply chromatic and diatonic transposition to notes
 
-our $VERSION = '0.0502';
+our $VERSION = '0.0600';
 
 use Moo;
 use strictures 2;
