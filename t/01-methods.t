@@ -78,4 +78,10 @@ $expect = [64,67,undef,71,76];
 $got = $obj->transpose(2, \@nums);
 is_deeply $got, $expect, 'transpose unknown';
 
+@notes = ('C4','E4','G4');
+$expect = [qw(G4 B4 D5)];
+$obj->notes(\@notes);
+$got = $obj->transpose(4);
+is_deeply $got, $expect, 'transpose notes';
+
 done_testing();
